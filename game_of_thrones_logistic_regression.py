@@ -44,5 +44,4 @@
       python game_of_thrones_logistic_regression.py > output.txt
       ```
 
-Feel free to adjust the actions based on  our preferences and the specifics of  our dataset.
 """
