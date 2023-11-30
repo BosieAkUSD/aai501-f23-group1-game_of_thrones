@@ -4,6 +4,10 @@ from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
+"""
+Analyzes the relationship between input features (age, nobility status, gender) 
+and the binary outcome of death or survival.
+"""
 def logistic_regression_analysis():
     print(" ")
     print("Running Logistic Regression Analysis...")
