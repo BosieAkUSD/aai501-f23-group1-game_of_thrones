@@ -30,7 +30,7 @@ We will focus on evaluating the performance of logistic regression, decision-mak
 
 ## Reference List
 
-- Kaggle. (n.d.). [Game of Thrones Dataset](https://www.kaggle.com/search?q=Game%2Bof%2BThrones)
+- Kaggle. (n.d.). [Game of Thrones Dataset](https://www.kaggle.com/datasets/mylesoneill/game-of-thrones)
 - GeeksforGeeks. (2023, July 14). [Understanding Logistic Regression](https://www.geeksforgeeks.org/understanding-logistic-regression/)
 
 ## Team Contributions
