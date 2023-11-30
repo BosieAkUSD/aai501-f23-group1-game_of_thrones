@@ -52,8 +52,7 @@ def logistic_regression_analysis():
     print("\nCoefficients:")
     print(coefficients)
 
-    # If you want to interpret the impact of each feature on the likelihood of death, you can associate them with the corresponding columns.
-    # Assuming you have a DataFrame containing the feature names, you can print the coefficients with their corresponding features:
+ 
     feature_names = X.columns
     coefficients_with_features = pd.DataFrame({'Feature': feature_names, 'Coefficient': coefficients.flatten()})
     print("\nCoefficients with Features:")
