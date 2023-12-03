@@ -18,6 +18,7 @@ mpl.use('Agg')
 warnings.filterwarnings("ignore", category=UserWarning, module="seaborn")
 
 def exploratory_data_analysis():
+    print("Running Exploratory Data Analysis...")
     battles = pd.read_csv("data_files/battles.csv")
     character_deaths = pd.read_csv("data_files/character-deaths.csv")
     character_predictions = pd.read_csv("data_files/character-predictions.csv")
@@ -101,3 +102,75 @@ def exploratory_data_analysis():
     sns.countplot(x="Death Year", hue="Book of Death", data=character_deaths)
     plt.title("Death Year and Book of Death")
     plt.savefig('appendix/death_year_and_book_of_death.png')
+
+    # Check for NANs values
+    data_NaN = character_predictions.isna().sum()
+    data_NaN[data_NaN > 0]
+    len(data_NaN)
+
+    # Check which characters have a negative age and it's value.
+    print("Mean age of characters before adjustment - ",character_predictions["age"].mean())
+    print(character_predictions["name"][character_predictions["age"] < 0])
+    print(character_predictions['age'][character_predictions['age'] < 0])
+
+    character_predictions.loc[1684, "age"] = 24.0  # Doreah is actually around 24
+    character_predictions.loc[1868, "age"] = 0.0  # Rhaego was never born
+
+    print("Mean age of characters after adjustment - ",character_predictions["age"].mean())
+
+    character_predictions["age"].fillna(character_predictions["age"].mean(), inplace=True)
+    character_predictions["culture"].fillna("", inplace=True)
+    character_predictions.fillna(value=-1, inplace=True)
+
+    # plotting violin plots to visualize the distribution for both alive, dead
+    f, ax = plt.subplots(2, 2, figsize=(17, 15))
+    sns.violinplot(data=character_predictions, x="isPopular", y="isNoble", hue="isAlive", split=True, ax=ax[0, 0])
+    ax[0, 0].set_title('Noble and Popular vs Mortality')
+    ax[0, 0].set_yticks(range(2))
+
+    sns.violinplot(data=character_predictions, x="isPopular", y="male", hue="isAlive", split=True, ax=ax[0, 1])
+    ax[0, 1].set_title('Male and Popular vs Mortality')
+    ax[0, 1].set_yticks(range(2))
+
+    sns.violinplot(data=character_predictions, x="isPopular", y="isMarried", hue="isAlive", split=True, ax=ax[1, 0])
+    ax[1, 0].set_title('Married and Popular vs Mortality')
+    ax[1, 0].set_yticks(range(2))
+
+    sns.violinplot(data=character_predictions, x="isPopular", y="book1", hue="isAlive", split=True, ax=ax[1, 1])
+    ax[1, 1].set_title('Book_1 and Popular vs Mortality')
+    ax[1, 1].set_yticks(range(2))
+    plt.title("Violin plots to visualize the distribution for both classes (alive, dead) in our dataset")
+    plt.savefig('appendix/violin_plots.png')
+
+    set(character_predictions['culture'])
+
+    # Get all of the values for culture in our dataset
+    cult = {
+        'Summer Islands': ['summer islands', 'summer islander', 'summer isles'],
+        'Ghiscari': ['ghiscari', 'ghiscaricari', 'ghis'],
+        'Asshai': ["asshai'i", 'asshai'],
+        'Lysene': ['lysene', 'lyseni'],
+        'Andal': ['andal', 'andals'],
+        'Braavosi': ['braavosi', 'braavos'],
+        'Dornish': ['dornishmen', 'dorne', 'dornish'],
+        'Myrish': ['myr', 'myrish', 'myrmen'],
+        'Westermen': ['westermen', 'westerman', 'westerlands'],
+        'Westerosi': ['westeros', 'westerosi'],
+        'Stormlander': ['stormlands', 'stormlander'],
+        'Norvoshi': ['norvos', 'norvoshi'],
+        'Northmen': ['the north', 'northmen'],
+        'Free Folk': ['wildling', 'first men', 'free folk'],
+        'Qartheen': ['qartheen', 'qarth'],
+        'Reach': ['the reach', 'reach', 'reachmen'],
+        'Ironborn': ['ironborn', 'ironmen'],
+        'Mereen': ['meereen', 'meereenese'],
+        'RiverLands': ['riverlands', 'rivermen'],
+        'Vale': ['vale', 'valemen', 'vale mountain clans']
+    }
+
+    # Grouping culture names
+    def get_cult(value):
+        value = value.lower()
+        v = [k for (k, v) in cult.items() if value in v]
+        return v[0] if len(v) > 0 else value.title()
+    character_predictions.loc[:, "culture"] = [get_cult(x) for x in character_predictions["culture"]]
