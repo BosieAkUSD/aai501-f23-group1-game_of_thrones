@@ -10,9 +10,6 @@ from collections import Counter
 import matplotlib.patches as mpatches
 import warnings
 
-# Use Non-Interactive Backend:
-# set the matplotlib backend to a non-interactive one:
-mpl.use('Agg')
 
 # Ignore seaborn categorical dtype warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="seaborn")
@@ -42,7 +39,6 @@ def exploratory_data_analysis():
     plt.figure(figsize=(10, 6))
     sns.countplot(x="year", data=battles)
     plt.title("Distribution of Battles Across Years")
-    plt.savefig('appendix/distribution_of_battles.png')
 
     majorevents = battles.groupby('year').sum()[["major_death", "major_capture"]].plot.bar(rot=0)
     _ = majorevents.set(xlabel="Year", ylabel="No. of Death/Capture Events", ylim=(0, 9)), majorevents.legend(["Major Deaths", "Major Captures"])

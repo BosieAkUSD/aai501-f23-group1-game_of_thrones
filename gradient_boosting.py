@@ -6,6 +6,8 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 
 def gradient_boosting_function():
+    print(" ")
+    print("Running Gradient Boosting Analysis...")
     character_predictions = pd.read_csv("data_files/character-predictions.csv")
     character_deaths = pd.read_csv("data_files/character-deaths.csv")
 
@@ -56,5 +58,3 @@ def gradient_boosting_function():
     print('\nFeature Importance:')
     for feature, importance in sorted_feature_importance:
         print(f'{feature}: {importance}')
-
-gradient_boosting_function()

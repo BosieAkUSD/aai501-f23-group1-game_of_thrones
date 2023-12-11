@@ -5,6 +5,8 @@ from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 def random_forest_function():
+    print(" ")
+    print("Running Random Forest Analysis...")
     # Load datasets
     character_predictions = pd.read_csv("data_files/character-predictions.csv")
     character_deaths = pd.read_csv("data_files/character-deaths.csv")
