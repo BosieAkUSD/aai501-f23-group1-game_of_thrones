@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingClassifier  # Changed to classifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, r2_score, mean_absolute_error, mean_squared_error
 import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -35,10 +35,20 @@ def gradient_boosting_function():
     conf_matrix = confusion_matrix(y_test, y_pred)
     classification_rep = classification_report(y_test, y_pred)
 
-    # Print the classification evaluation metrics
     print(f"Accuracy: {accuracy}")
     print(f"Confusion Matrix:\n{conf_matrix}")
     print(f"Classification Report:\n{classification_rep}")
+
+    mse = mean_squared_error(y_test, y_pred)
+    print(f'Mean Squared Error: {mse}')
+
+
+    r2 = r2_score(y_test, y_pred)
+    print(f'R^2 Score: {r2}')
+
+
+    mae = mean_absolute_error(y_test, y_pred)
+    print(f'Mean Absolute Error: {mae}')
 
     feature_importance = gb_classifier.feature_importances_
     feature_importance_dict = dict(zip(selected_features, feature_importance))
