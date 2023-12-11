@@ -51,7 +51,7 @@ def exploratory_data_analysis():
     plt.figure(figsize=(12, 6))
     sns.countplot(x="battle_type", hue="attacker_outcome", data=battles)
     plt.title("Battle Types and Outcomes")
-    plt.savefig('appendix/battle_types_and_outcomes.png')
+    plt.show()
 
     # Investigate the Involvement of Attackers and Defenders
     attackers = battles[["attacker_1", "attacker_2", "attacker_3", "attacker_4"]].stack().value_counts()
@@ -63,13 +63,13 @@ def exploratory_data_analysis():
     defenders.head(10).plot(kind="bar", color="blue", alpha=0.7, label="Defenders")
     plt.title("Top Attackers and Defenders")
     plt.legend()
-    plt.savefig('appendix/top_attackers_and_defenders.png')
+    plt.show()
 
     # Analyze the Size of Attacking and Defending Forces
     plt.figure(figsize=(12, 6))
     sns.scatterplot(x="attacker_size", y="defender_size", data=battles, hue="attacker_outcome")
     plt.title("Size of Attacking and Defending Forces")
-    plt.savefig('appendix/size_forces.png')
+    plt.show()
 
     character_deaths.info()
 
@@ -82,26 +82,26 @@ def exploratory_data_analysis():
     plt.figure(figsize=(8, 5))
     sns.countplot(x="Gender", data=character_deaths)
     plt.title("Gender Distribution of Characters")
-    plt.savefig('appendix/gender_distribution.png')
+    plt.show()
 
     # Analyze Nobility Status
     plt.figure(figsize=(8, 5))
     sns.countplot(x="Nobility", data=character_deaths)
     plt.title("Nobility Status of Characters")
-    plt.savefig('appendix/nobility_status_characters.png')
+    plt.show()
 
     # Investigate Allegiances and Their Relation to Fates
     plt.figure(figsize=(12, 6))
     sns.countplot(x="Allegiances", hue="Death Year", data=character_deaths)
     plt.xticks(rotation=45, ha="right")
     plt.title("Allegiances and Death Years")
-    plt.savefig('appendix/allegiances_and_death_years.png')
+    plt.show()
 
     # Examine Death-related Columns
     plt.figure(figsize=(14, 6))
     sns.countplot(x="Death Year", hue="Book of Death", data=character_deaths)
     plt.title("Death Year and Book of Death")
-    plt.savefig('appendix/death_year_and_book_of_death.png')
+    plt.show()
 
     # Check for NANs values
     data_NaN = character_predictions.isna().sum()
@@ -140,7 +140,7 @@ def exploratory_data_analysis():
     ax[1, 1].set_title('Book_1 and Popular vs Mortality')
     ax[1, 1].set_yticks(range(2))
     plt.title("Violin plots to visualize the distribution for both classes (alive, dead) in our dataset")
-    plt.savefig('appendix/violin_plots.png')
+    plt.show()
 
     set(character_predictions['culture'])
 
