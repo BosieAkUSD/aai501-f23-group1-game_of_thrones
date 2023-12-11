@@ -56,5 +56,3 @@ def gradient_boosting_function():
     print('\nFeature Importance:')
     for feature, importance in sorted_feature_importance:
         print(f'{feature}: {importance}')
-
-gradient_boosting_function()
